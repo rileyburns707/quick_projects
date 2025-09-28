@@ -1,13 +1,15 @@
 """
+sandbox.py
+----------
 This is program is a sandbox for me to try different tkinter
 commands and learning how it works.
 """
 
 # Import tkinter
-from tkinter import *
+import tkinter as tk
+from tkinter import ttk
 
-# create root window
-root = Tk()
+root = tk.Tk()
 
 # root window title and dimension
 root.title("Test window title")
