@@ -6,10 +6,9 @@ commands and learning how it works.
 """
 
 # Import tkinter
-import tkinter as tk
-from tkinter import ttk
+from tkinter import *
 
-root = tk.Tk()
+root = Tk()
 
 # root window title and dimension
 root.title("Test window title")
@@ -39,7 +38,7 @@ text.grid(column=1, row=0)
 # function to display text when the button is clicked
 def clicked():
     ans = "You answered: " + text.get()
-    label.configure(text = ans)
+    label.configure(text = "test")
 
 # actual button widget
 button = Button(root, text = "Press here",
