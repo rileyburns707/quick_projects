@@ -15,8 +15,8 @@ def get_quote():
 
         if response.status_code == 200:
             # print the quote
-            data = response.json()
-            quote_info = data["data"]
+            data = response.json()  # Convert JSON to Python dict
+            quote_info = data["data"]   # Extract the actual quote info from "data" key
             print(f"'{quote_info['quote']}'\n       — {quote_info['author']}\n")
             return quote_info
         else:
