@@ -8,6 +8,25 @@ from a stoic. It calls an API to get the quotes.
 import requests
 from tkinter import *
 
+"""
+class stoicQuotes():
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Stoic quote generator")
+
+stoicQuotes(root)
+root.mainloop()  # endless loop to make the window run till we close it
+"""
+
+root = Tk()
+root.title("Stoic quote generator")
+root.geometry("500x200")
+
+BUTTON_CONTROL_FONT = ("Helvetica", 20, "bold")
+PROMPT_FONT = ("Helvetica", 22, "bold")
+QUOTE_FONT = ("Helvetica", 14, "bold")
+
+
 def get_quote():
     """
     This function requests the quote from API and prints the quote and author if a 
@@ -21,12 +40,9 @@ def get_quote():
         if response.status_code == 200:
             data = response.json() # Convert JSON to Python dict
             data_info = data['data'] # get the author and quote from the data
-            
-            # print and return
-            print(f"{data_info['quote']}\n        - {data_info['author']}")
-            return data_info
-
-            
+            quote = Label(root, text=f"{data_info['quote']}\n        - {data_info['author']}", font=QUOTE_FONT)
+            quote.grid(row=1, column = 3, columnspan=2, padx=5, pady=5)
+            return data_info            
         else:
             print("Error: " + str(response.status_code))
 
@@ -43,16 +59,13 @@ def main():
     Section 1: 'Backend'
     In this section I set up Tkinter and the functions
     """
-    root = Tk()
-    root.title("Stoic quote generator")
-    root.geometry("500x200")
-
-    BUTTON_CONTROL_FONT = ("Helvetica", 20, "bold")
-    PROMPT_FONT = ("Helvetica", 22, "bold")
 
     def yes_clicked():
         # Clears the prompt and buttons. Calls the API and prints a quote.
-        pass
+        prompt.grid_forget()
+        yes.grid_forget()
+        no.grid_forget()
+        get_quote()
 
     def no_clicked():
         # Clears the prompt and buttons and shows the no worries method
@@ -60,6 +73,8 @@ def main():
 
     def refresh():
         # Clears any quote and shows the prompt with yes and no again
+        # quote.grid_forget()
+        prompt.grid(row=1, column = 3, columnspan=2, padx=5, pady=5)
         pass
 
     # ---------------------------------------------------------------------------------
@@ -90,19 +105,7 @@ def main():
     refresh_button.grid(row=0, column=6, sticky="ne", padx=0, pady=0)
 
     # Execute Tkinter
-    root.mainloop()  # endless loop to make the window run till we close it
-
-
-    """
-    question = input("Would you like a quote (y/n): ").lower()
-
-    if question == 'y':
-        print("loading...\n")
-        get_quote()
-    else:
-        print("No worries, have a great day!")
-    """
-    
+    root.mainloop()  # endless loop to make the window run till we close it    
 
 if __name__ == '__main__':
     main()
